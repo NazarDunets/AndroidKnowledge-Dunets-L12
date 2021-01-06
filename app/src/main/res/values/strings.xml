@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AndroidKnowledgeDunetsL12</string>
+    <string name="alertb_text">AD</string>
+    <string name="alertfb_text">ADF</string>
+    <string name="bsb_text">BS</string>
+    <string name="bsfb_text">BSF</string>
+    <string name="strt_text">Start</string>
+
+    <string name="dialog_title">MyTitle</string>
+    <string name="exit_text">Exit</string>
+
+    <string name="list_item_text">Item at %1$d position</string>
+</resources>
