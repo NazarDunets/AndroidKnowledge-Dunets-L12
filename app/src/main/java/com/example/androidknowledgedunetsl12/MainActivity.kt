@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
         setupBottomSheet()
-        setupListeners()
+        setListeners()
     }
 
-    private fun setupListeners() {
+    private fun setListeners() {
         binding.startButton.setOnClickListener {
             animateToKeyframeTwo()
         }
@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSimpleAlertDialog() {
         MaterialDialog(this).show {
-            title(text = "Title")
-            message(text = "Message")
+            title(text = "My Title")
+            message(text = "Lorem ipsum fizz buzz fizz buzz")
             positiveButton(text = "OK") {
                 it.dismiss()
             }
@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    // Simple constraint animation
     private fun animateToKeyframeTwo() {
         val transition = ChangeBounds()
         transition.interpolator =

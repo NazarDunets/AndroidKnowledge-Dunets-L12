@@ -30,14 +30,14 @@ class CustomDialogFragment : DialogFragment() {
         setListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setListeners() {
         binding.exitButton.setOnClickListener {
             dialog?.dismiss()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

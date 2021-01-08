@@ -48,16 +48,19 @@ class MdBtSheetFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val recyclerView = binding.msheetList
-        recyclerView.layoutManager =
-            LinearLayoutManager(context)
-        recyclerView.adapter =
-            arguments?.getInt(ARG_ITEM_COUNT)?.let { ItemAdapter(it) }
+        setupRecyclerView()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupRecyclerView() {
+        binding.msheetList.also { rcw ->
+            rcw.layoutManager = LinearLayoutManager(context)
+            rcw.adapter = arguments?.getInt(ARG_ITEM_COUNT)?.let { ItemAdapter(it) }
+        }
     }
 
     private inner class ViewHolder constructor(
@@ -81,16 +84,21 @@ class MdBtSheetFragment : BottomSheetDialogFragment() {
             ViewHolder(LayoutInflater.from(parent.context), parent)
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+            // Next 3 lines are used to generate drawable circle with one of 4 colors
             val compoundDrawable = getDrawable(requireContext(), R.drawable.random_shape)
             compoundDrawable?.colorFilter =
                 PorterDuffColorFilter(sideColorsFromXml[position % 4], PorterDuff.Mode.SRC)
 
-            holder.itemText.also {
-                it.text = getString(R.string.list_item_text, position)
-                it.setCompoundDrawablesWithIntrinsicBounds(
+            holder.itemText.also { txtV ->
+                txtV.text = getString(R.string.list_item_text, position)
+
+                // Setting circle drawable to the left of the TextView
+                txtV.setCompoundDrawablesWithIntrinsicBounds(
                     compoundDrawable, null, null, null
                 )
-                it.setOnClickListener {
+
+                txtV.setOnClickListener {
                     Toast.makeText(
                         requireContext(),
                         "Item #${position} pressed",
@@ -104,4 +112,5 @@ class MdBtSheetFragment : BottomSheetDialogFragment() {
 
         override fun getItemCount(): Int = mItemCount
     }
+
 }
